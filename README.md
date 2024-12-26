@@ -16,23 +16,6 @@ A community-driven safety platform that empowers neighborhoods to work together 
 - **Incident Tracking**: Monitor and respond to reported incidents
 - **Analytics Dashboard**: Track community safety metrics
 
-## Getting Started
-
-1. Clone the repository
-```bash
-git clone [repository-url]
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Start the development server
-```bash
-npm run dev
-```
-
 ## Project Structure
 
 ```
