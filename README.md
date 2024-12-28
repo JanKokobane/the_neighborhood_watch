@@ -95,19 +95,9 @@ neighborhood-watch/
 - Lazy loading for images
 - Efficient DOM manipulation
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-For questions and support, please contact:
-- Email: support@neighborhoodwatch.org
-- Website: www.neighborhoodwatch.org
-
 ## Acknowledgments
 
 - Community contributors
 - Security advisors
 - Beta testers
-- Design team
+
