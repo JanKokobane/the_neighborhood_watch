@@ -8,10 +8,11 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True, methods=['GET', 'POST', 'DELETE'])
 
 # Configure the database connection pool
+# please create the db neighborhood_watch and use your sql credentials 
 dbconfig = {
     "database": "neighborhood_watch",
     "user": "root",
-    "password": "Mojancko@01",
+    "password": "root",
     "host": "localhost"
 }
 
