@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #f0f0f0;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --border-color: #ddd;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  padding-inline: 1rem;
+  display: grid;
+  overflow: hidden;
+}
+
+.container__content {
+  width: 100%;
+  padding-block: 2rem;
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.container__content h2 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.container__content h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.container__content h3  span {
+  color: #f7cb07;
+  font-size: 2.3rem;
+}
+
+.container__content h1 {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.container__content h1 span {
+ color: var(--primary-color);
+}
+
+.container__content form {
+  display: grid;
+  gap: 5px;
+}
+
+.input__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.container__content label {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.input__header a {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.input__row i {
+    cursor: pointer;
+}
+
+.input__header a:hover {
+  color: var(--text-dark);
+}
+
+.input__row {
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+}
+
+.container__content input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background-color: transparent;
+}
+
+.container__content input::placeholder {
+  color: var(--text-dark);
+}
+
+.container__content button {
+  max-width: fit-content;
+  margin-inline: auto;
+  margin-block: 1rem 2rem;
+  padding: 0.75rem 2rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border-radius: 5rem;
+  cursor: pointer;
+}
+
+.container__content button:hover {
+  color: #e7dede;
+}
+
+.container__content h6 {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.logins {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logins a {
+  padding: 0.5rem 2.5rem;
+  border: 2px solid var(--text-dark);
+  border-radius: 5rem;
+}
+
+.container__content p {
+  color: var(--text-light);
+  text-align: center;
+}
+
+.container__content p a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+@media (width > 768px) {
+  .container {
+    grid-template-columns:
+      minmax(1rem, 1fr)
+      minmax(0, calc(var(--max-width) / 2))
+      minmax(0, calc(var(--max-width) / 2))
+      minmax(1rem, 1fr);
+  }
+
+  .container__content {
+    margin-inline-start: unset;
+    grid-area: 1/2/2/3;
+    align-self: center;
+  }
+
+}
+
+.error-message {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+#message-container {
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#message-container p {
+  margin: 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#message-container p.success {
+  color: green;
+}
+
+#message-container p.error {
+  color: red;
+}
+
+/* Style for error messages */
+#error {
+  color: red;
+  font-weight: bold;
+}
+
+/* Style for success messages */
+#success {
+  color: green;
+  font-weight: bold;
+}
+
+/* Styling for the message container */
+#message-container {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+
+@media (max-width: 780px) {
+  .container__image::before {
+    display: none;
+}
+.container__image img {
+  display: none;
+}
+}

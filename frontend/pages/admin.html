@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/frontend/css/signup.css" />
+  <title>The Neighborhood Watch - Admin</title>
+</head>
+<body>
+  <div class="container">
+    <div class="container__content">
+      <h1>Admin Sign <span>Up</span></h1>
+      <div id="message-container"></div>
+
+      <form id="registerForm">
+        <label for="username">Username</label>
+        <div class="input__row">
+            <input type="text" id="username" placeholder="Username" />
+        </div>
+        <span class="error-message" id="username-error"></span>
+
+        <div class="input__header">
+            <label for="signup-password">Password</label>
+        </div>
+        <div class="input__row">
+            <input type="password" id="signup-password" placeholder="Password" />
+            <span id="password-eye" onclick="togglePassword('signup-password', 'password-eye')">
+                <i class="fas fa-eye-slash"></i>
+            </span>
+        </div>
+        <span class="error-message" id="password-error"></span>
+    
+        <div class="input__row">
+            <input type="password" id="confirm-password" placeholder="Repeat Password" />
+            <span id="confirm-password-eye" onclick="togglePassword('confirm-password', 'confirm-password-eye')">
+                <i class="fas fa-eye-slash"></i>
+            </span>
+        </div>
+        <span class="error-message" id="confirm-password-error"></span>
+    
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <p><a href="/frontend/pages/admin-login.html">Login</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('registerForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('signup-password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const usernameError = document.getElementById('username-error');
+        const passwordError = document.getElementById('password-error');
+        const confirmPasswordError = document.getElementById('confirm-password-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();  // Prevent form submission
+            let isValid = true;
+
+            // Username validation
+            if (!usernameInput.value) {
+                usernameError.textContent = 'Username is required';
+                isValid = false;
+            } else {
+                usernameError.textContent = '';
+            }
+
+            // Password validation
+            if (!passwordInput.value) {
+                passwordError.textContent = 'Password is required';
+                isValid = false;
+            } else if (passwordInput.value.length < 8) {
+                passwordError.textContent = 'Password must be at least 8 characters';
+                isValid = false;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            // Confirm password validation
+            if (!confirmPasswordInput.value) {
+                confirmPasswordError.textContent = 'Confirm password is required';
+                isValid = false;
+            } else if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordError.textContent = 'Passwords do not match';
+                isValid = false;
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+
+            // Submit form if valid
+            if (isValid) {
+                const data = {
+                    username: usernameInput.value,
+                    password: passwordInput.value,
+                };
+
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/admin-signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert('Admin registered successfully!');
+                        window.location.href = '/frontend/pages/admin-login.html';  // Redirect to admin login
+                    } else {
+                        alert(result.error || 'Registration failed.');
+                        console.error('Error response:', result);
+                    }
+                } catch (error) {
+                    alert('An error occurred: ' + error.message);
+                    console.error('Fetch error:', error);
+                }
+            }
+        });
+
+        // Toggle password visibility
+        window.togglePassword = function(id, eyeIconId) {
+            const passwordField = document.getElementById(id);
+            const eyeIcon = document.getElementById(eyeIconId);
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        };
+    });
+</script>
+
+</body>
+</html>

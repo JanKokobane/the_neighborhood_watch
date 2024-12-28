@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - The Neighborhood Watch</title>
+    <link rel="stylesheet" href="/frontend/css/admin.css">
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="user-info">
+                <div class="user-avatar">👑</div>
+                <span id="adminName">Admin</span>
+            </div>
+            <nav class="dashboard-nav">
+                <a href="#" class="active" data-panel="overview">Overview</a>
+                <a href="#" data-panel="users">Users</a>
+                <a href="#" data-panel="incidents">Incidents</a>
+                <a href="#" data-panel="alerts">Manage Alerts</a>
+                <a href="#" data-panel="events">Manage Events</a>
+                <a href="/frontend/pages/admin-login.html" id="logoutBtn">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+        <div id="overview" class="dashboard-panel active">
+            <h2>Admin Overview</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p class="stat-number" id="total-users">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Reports</h3>
+                    <p class="stat-number" id="pending-reports">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Alerts</h3>
+                    <p class="stat-number" id="active-alerts">0</p>
+                </div>
+            </div>
+        </div>
+
+
+            <div id="users" class="dashboard-panel">
+                <h2>User Management</h2>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersList">
+                            <!-- Users will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="incidents" class="dashboard-panel">
+                <h2>Incident Management</h2>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incidentsList">
+                            <!-- Incidents will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            
+            <div id="alerts" class="dashboard-panel">
+                <h2>Alert Management</h2>
+                <form id="alertForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="alertTitle">Alert Title</label>
+                        <input type="text" id="alertTitle">
+                        <span class="error-message" id="alertTitle-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="alertMessage">Message</label>
+                        <textarea id="alertMessage"></textarea>
+                        <span class="error-message" id="alertMessage-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="alertPriority">Priority</label>
+                        <select id="alertPriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <span class="error-message" id="alertPriority-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Alert</button>
+                </form>
+            </div>
+            
+            <div id="events" class="dashboard-panel">
+                <h2>Event Management</h2>
+                <form id="eventForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="eventTitle">Event Title</label>
+                        <input type="text" id="eventTitle">
+                        <span class="error-message" id="eventTitle-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">Date</label>
+                        <input type="datetime-local" id="eventDate">
+                        <span class="error-message" id="eventDate-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLocation">Location</label>
+                        <input type="text" id="eventLocation">
+                        <span class="error-message" id="eventLocation-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+                        <textarea id="eventDescription"></textarea>
+                        <span class="error-message" id="eventDescription-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Event</button>
+                </form>
+            </div>
+            
+        </main>
+    </div>
+    <script src="/frontend/js/admin.js"></script>
+    <script src="/frontend/js/Alert-Management.js"></script>
+    <script src="/frontend/js/Event-Management.JS"></script>
+</body>
+</html>

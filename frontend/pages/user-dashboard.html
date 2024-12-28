@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Neighborhood Watch</title>
+    <link rel="stylesheet" href="/frontend/css/dashboard.css">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav class="dashboard-nav">
+                <h1>User Dashboard</h1>
+                <br>
+                <a href="#" class="active" data-panel="overview">Overview</a>
+                <a href="#" data-panel="incidents">Report Incident</a>
+                <a href="#" data-panel="alerts">Alerts</a>
+                <a href="#" data-panel="events">Events</a>
+                <a href="#" data-panel="resources">Resources</a>
+                <a href="/frontend/home.html" id="logoutBtn">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <div id="overview" class="dashboard-panel active">
+                <h2>Dashboard Overview</h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3>Recent Incidents</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Alerts</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Upcoming Events</h3>
+                        <p class="stat-number">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="incidents" class="dashboard-panel">
+                <h2>Report an Incident</h2>
+                <form id="incidentForm">
+                    <div class="form-group">
+                        <label for="incidentType">Incident Type</label>
+                        <select id="incidentType" name="incidentType">
+                            <option value="">Select type</option>
+                            <option value="suspicious">Suspicious Activity</option>
+                            <option value="theft">Theft</option>
+                            <option value="vandalism">Vandalism</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span class="error-message" id="incidentType-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="incidentDescription">Description</label>
+                        <textarea id="incidentDescription" name="incidentDescription"></textarea>
+                        <span class="error-message" id="incidentDescription-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="incidentLocation">Location</label>
+                        <input type="text" id="incidentLocation" name="incidentLocation">
+                        <span class="error-message" id="incidentLocation-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="incidentPhoto">Photo (optional)</label>
+                        <input type="file" id="incidentPhoto" name="incidentPhoto" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                </form>
+                
+            </div>
+
+            <div id="alerts" class="dashboard-panel">
+                <h2>Community Alerts</h2>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alertsList">
+                            <!-- Alerts will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+            <div id="events" class="dashboard-panel">
+                <h2>Neighborhood Events</h2>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsList">
+                            <!-- Events will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+            <div id="resources" class="dashboard-panel">
+                <h2>Safety Resources</h2>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3>Emergency Contacts</h3>
+                        <ul>
+                            <li>Police: 911</li>
+                            <li>Fire Department: 911</li>
+                            <li>Community Hotline: +2778 6388 679</li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <h3>Safety Guidelines</h3>
+                        <ul>
+                            <li><a href="https://www.saps.gov.za/alert/safety_awareness_home.php#:~:text=Security%20lights%20on%20the%20outside,not%20give%20away%20your%20position." target="_blanck">Home Security Tips</a></li>
+                            <li><a href="https://sahris.sahra.org.za/sites/default/files/additionaldocs/McTagsPV1-AppM%28J%29-Emergency%20Management%20Plan_0.pdf" target="_blank">Emergency Preparedness</a></li>
+                            <li><a href="https://www.saps.gov.za/alert/personal_safety_tips.php" target="_blank">Personal Safety Guide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/frontend/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/frontend/css/signup.css" />
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>The Neighborhood Watch</title>
+</head>
+<body>
+  <div class="container">
+    <div class="container__content">
+      <h1>Admin Log <span>In</span></h1>
+      <div id="message-container"></div>
+      <form id="loginForm">
+          <label for="email">User Name</label>
+          <div class="input__row">
+              <input type="username" id="login-username" placeholder="Enter User Name" />
+          </div>
+          <span class="error-message" id="email-error"></span>
+      
+          <div class="input__header">
+              <label for="password">Password</label>
+          </div>
+          <div class="input__row">
+              <input type="password" id="login-password" placeholder="Password" />
+              <span id="password-eye" onclick="togglePassword('login-password', 'password-eye')">
+                  <i class="fas fa-eye-slash"></i>
+              </span>
+          </div>
+          <span class="error-message" id="password-error"></span>
+      
+          <button type="submit">Login</button>
+      </form>
+    
+      <p>Don't have an account yet? <a href="/frontend/pages/admin.html">Sign up for free</a></p>
+    </div>
+   
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('login-username');
+        const passwordInput = document.getElementById('login-password');
+        const usernameError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+        const passwordEye = document.getElementById('password-eye');
+
+        // Password toggle function
+        function togglePassword(inputId, eyeIconId) {
+            const passwordField = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(eyeIconId);
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.innerHTML = '<i class="fas fa-eye"></i>';
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            }
+        }
+
+        // Password toggle functionality
+        passwordEye.addEventListener('click', () => {
+            togglePassword('login-password', 'password-eye');
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent form submission
+            let isValid = true;
+
+            // Username validation
+            if (!usernameInput.value) {
+                usernameError.textContent = 'Username is required';
+                isValid = false;
+            } else {
+                usernameError.textContent = '';
+            }
+
+            // Password validation
+            if (!passwordInput.value) {
+                passwordError.textContent = 'Password is required';
+                isValid = false;
+            } else if (passwordInput.value.length < 8) {
+                passwordError.textContent = 'Password must be at least 8 characters';
+                isValid = false;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            // Submit form if valid
+            if (isValid) {
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/admin-login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: usernameInput.value,
+                            password: passwordInput.value
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert('Login successful!');
+                        window.location.href = 'admin-dashboard.html'; // Adjust the path to your admin dashboard
+                    } else {
+                        alert(data.error || 'Login failed.');
+                        console.error('Error response:', data);
+                    }
+                } catch (error) {
+                    alert('An error occurred: ' + error.message);
+                    console.error('Fetch error:', error);
+                }
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>
